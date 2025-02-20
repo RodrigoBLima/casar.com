@@ -14,4 +14,18 @@ export const fetchHttpClient: HttpClientConfig = {
     }
     return response.json();
   },
+
+  async delete(url: string, options?: RequestInit): Promise<void> {
+    console.log(`process.env`, process.env.NEXT_PUBLIC_GITHUB_TOKEN);
+    const headers = {
+      Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+      ...options?.headers,
+    };
+
+    const response = await fetch(url, { method: 'DELETE', headers, ...options });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao deletar: ${response.statusText}`);
+    }
+  },
 };

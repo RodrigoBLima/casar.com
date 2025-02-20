@@ -5,11 +5,11 @@ import SearchUserContent from './search-user';
 
 export default function Home() {
   return (
-    <div data-testid="home-page">
+    <main data-testid="home-page">
       <Header />
       <SearchUserContent />
       <NotFoundContent />
       <BottomNavigation />
-    </div>
+    </main>
   );
 }
