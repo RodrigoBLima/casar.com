@@ -6,7 +6,8 @@ interface User {
   avatar_url: string;
 }
 
-export async function searchUsers(query: string): Promise<User[]> {
+export async function findUser(query: string): Promise<User> {
   const result = await fetchHttpClient.get<{ items: User[] }>(`${GITHUB_API_BASE_URL}/search/users?q=${query}`);
-  return result.items;
+  const [user] = result.items || [];
+  return user ?? null;
 }

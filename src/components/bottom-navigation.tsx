@@ -6,7 +6,7 @@ import { faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Anchor } from './anchor';
 
 const bottomNavItems = [
-  { name: 'Home', icon: faUser, href: '/', dataTestId: 'nav-item-home' },
+  { name: 'Profile', icon: faUser, href: '/profile', dataTestId: 'nav-item-profile' },
   {
     name: 'Favorites',
     icon: faHeart,

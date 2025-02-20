@@ -1,6 +1,7 @@
 import { getLanguageColor } from '@/services/get-language-color';
 import ButtonRoundedHearth from './button-rounded-hearth';
 import { Repository } from '@/app/interfaces/repository';
+import { formatUpdatedDate } from '@/utils/to-locale-date-string';
 
 interface RepositoryCardProps extends Repository {
   isFavorite?: boolean;
@@ -12,7 +13,7 @@ export async function RepositoryCard({ name, language, updated_at, owner, isFavo
 
   return (
     <section className="flex flex-col gap-2 border-1 border-gray-soft rounded-sm p-4" data-testid="repository-card">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-1 justify-between">
         <h2 className="text-lg font-semibold text-gray-neutral">{name}</h2>
         <ButtonRoundedHearth
           owner={owner.login}
@@ -29,7 +30,7 @@ export async function RepositoryCard({ name, language, updated_at, owner, isFavo
           <span className="w-4 h-4 rounded-full inline-block" style={{ backgroundColor: color }} />
           <p className="font-normal text-xs text-gray-neutral">{language || '-'}</p>
         </div>
-        <p className="font-normal text-xs text-gray-neutral">{updated_at}</p>
+        <p className="font-normal text-xs text-gray-neutral">{formatUpdatedDate(updated_at)}</p>
       </div>
     </section>
   );
