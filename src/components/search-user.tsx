@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { InputField, InputIcon, InputRoot } from '@/components/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 import { findUser } from '@/services/find-user';
 
@@ -16,6 +16,8 @@ const githubUsernameSchema = z.object({
 type GithubUsernameSchema = z.infer<typeof githubUsernameSchema>;
 
 export function SearchUserForm() {
+  const searchParams = useSearchParams();
+  const defaultName = searchParams.get('name') ?? '';
   const router = useRouter();
 
   const {
@@ -24,6 +26,7 @@ export function SearchUserForm() {
     formState: { errors },
   } = useForm<GithubUsernameSchema>({
     resolver: zodResolver(githubUsernameSchema),
+    defaultValues: { name: defaultName },
   });
 
   async function handleSearchUser({ name }: GithubUsernameSchema) {

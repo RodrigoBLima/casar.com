@@ -1,11 +1,14 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Anchor } from './anchor';
+import { Button } from './button';
+
+const getRouteName = (url: string) => url.replace(/^\//, '').split('?')[0];
 
 export function BottomNavigation() {
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const githubUserName = searchParams.get('name');
@@ -24,20 +27,25 @@ export function BottomNavigation() {
     <nav className="fixed bottom-0 left-0 w-full h-[69px] md:hidden flex inset-shadow-md" data-testid="bottom-navigation">
       <ul role="list" aria-label="Botão navigation menu" className="grid grid-cols-2 w-full">
         {bottomNavItems.map(navItem => {
-          const isCurrentRoute = navItem.href.includes(pathname);
+          const isCurrentRoute = getRouteName(navItem.href) === getRouteName(pathname);
           const disabledClassName = 'bg-white text-gray-light hover:bg-white-matte';
           const activeClassName = 'text-white bg-blue-primary hover:bg-blue-light';
           const incrementCss = isCurrentRoute ? activeClassName : disabledClassName;
+          const isDisabled = !githubUserName;
 
           return (
-            <li key={navItem.name} className="flex-1">
-              <Anchor
-                className={`flex items-center justify-center gap-2 p-6 h-full ${incrementCss}`}
-                href={navItem.href}
-                data-testid={navItem.dataTestId}
+            <li key={navItem.name} className="flex-1" aria-disabled={!githubUserName}>
+              <Button
+                disabled={isDisabled}
+                onClick={() => {
+                  if (!isDisabled) {
+                    router.push(navItem.href);
+                  }
+                }}
+                className={`w-full flex items-center justify-center gap-2 p-6 h-full disabled:pointer-events-none disabled:opacity-50 ${incrementCss}`}
               >
-                <FontAwesomeIcon icon={navItem.icon} width={24} height={20} />
-              </Anchor>
+                <FontAwesomeIcon icon={navItem.icon} />
+              </Button>
             </li>
           );
         })}

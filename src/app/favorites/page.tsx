@@ -19,8 +19,8 @@ export default async function Favorites({ searchParams }: FavoritesProps) {
   return (
     <main data-testid="favorites-page">
       <Header />
-      <section className="flex flex-col gap-2 pt-8 px-5 md:pb-5 pb-24 overflow-y-auto md:max-w-4xl md:mx-auto">
-        <h1 className="text-[1.313rem] font-semibold text-gray-neutral md:text-blue-primary md:">Meus favoritos</h1>
+      <section className="flex flex-col gap-2 md:gap-5 pt-8 px-5 md:pb-5 pb-24 overflow-y-auto md:max-w-4xl md:mx-auto">
+        <h1 className="text-[1.313rem] font-semibold text-gray-neutral md:text-blue-primary md:text-center">Meus favoritos</h1>
         {repos.map(repo => (
           <RepositoryCard key={repo.id} {...repo} isFavorite />
         ))}

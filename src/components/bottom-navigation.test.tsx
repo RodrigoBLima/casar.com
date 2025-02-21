@@ -7,6 +7,7 @@ import { BottomNavigation } from './bottom-navigation';
 jest.mock('next/navigation', () => ({
   useSearchParams: jest.fn(),
   usePathname: jest.fn(),
+  useRouter: jest.fn(),
 }));
 
 describe('Bottom Navigation Component', () => {
