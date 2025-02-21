@@ -1,3 +1,11 @@
+## Repo Radar
+
+Repo Radar é uma aplicação frontend responsiva que permite buscar usuários do GitHub, favoritar repositórios e desfavoritar repositórios previamente adicionados aos favoritos.
+
+## Propósito da aplicação
+
+Este projeto foi desenvolvido como parte do processo seletivo da empresa Casar.com para vagas de desenvolvedor sênior/pleno na área de frontend.
+
 # Guia de Início
 
 ## Configuração do `.env.local`
@@ -57,3 +65,11 @@ yarn test:watch
 # ou
 pnpm test:watch
 ```
+
+## Tecnologias utilizadas
+
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **Zod**
+- **React Hook Form**
