@@ -3,8 +3,14 @@ import { Header } from '@/components/header';
 import { RepositoryCard } from '@/components/repository-card';
 import { getStaredRepos } from '@/services/get-stared-repos';
 
-export default async function Favorites() {
-  const repos = await getStaredRepos('RodrigoBLima', {
+interface FavoritesProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function Favorites({ searchParams }: FavoritesProps) {
+  const { name } = await searchParams;
+
+  const repos = await getStaredRepos(name as string, {
     next: {
       tags: ['get-favorites'],
     },

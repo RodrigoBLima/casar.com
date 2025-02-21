@@ -6,10 +6,15 @@ import { SearchUserForm } from '@/components/search-user';
 import { getUser } from '@/services/get-user';
 import { getUserRepos } from '@/services/get-user-repos';
 
-export default async function ProfilePage() {
-  // TODO: get from state the name
-  const user = await getUser('RodrigoBLima');
-  const repos = await getUserRepos('RodrigoBLima', {
+interface ProfilePageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function ProfilePage({ searchParams }: ProfilePageProps) {
+  const { name } = await searchParams;
+
+  const user = await getUser(name as string);
+  const repos = await getUserRepos(name as string, {
     next: {
       tags: ['get-user-repos'],
     },
@@ -43,7 +48,7 @@ export default async function ProfilePage() {
               width={48}
             />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col">
               <h1 className="font-semibold text-lg md:text-[1.313rem] text-gray-neutral">{user.name}</h1>
               <span className="font-normal text-sm text-gray-dark md:text-center">{user.company || '-'}</span>
             </div>

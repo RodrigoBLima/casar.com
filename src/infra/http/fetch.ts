@@ -4,7 +4,7 @@ export const fetchHttpClient: HttpClientConfig = {
   async get<T>(url: string, options?: RequestInit): Promise<T> {
     const headers = {
       Accept: 'application/vnd.github.v3+json',
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN || process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
       ...options?.headers,
     };
 
@@ -16,7 +16,6 @@ export const fetchHttpClient: HttpClientConfig = {
   },
 
   async delete(url: string, options?: RequestInit): Promise<void> {
-    console.log(`process.env`, process.env.NEXT_PUBLIC_GITHUB_TOKEN);
     const headers = {
       Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
       ...options?.headers,
