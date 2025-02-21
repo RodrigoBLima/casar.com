@@ -2,12 +2,14 @@ import { getLanguageColor } from '@/services/get-language-color';
 import ButtonRoundedHearth from './button-rounded-hearth';
 import { Repository } from '@/app/interfaces/repository';
 import { formatUpdatedDate } from '@/utils/to-locale-date-string';
+import { checkRepoIsStarred } from '@/storage/cookie/check-repo-is-starred';
 
 interface RepositoryCardProps extends Repository {
   isFavorite?: boolean;
 }
 
-export async function RepositoryCard({ name, language, updated_at, owner, isFavorite = false }: RepositoryCardProps) {
+export async function RepositoryCard({ id, name, language, updated_at, owner, isFavorite = false }: RepositoryCardProps) {
+  const isFavoritedByCookie = await checkRepoIsStarred(id);
   const color = await getLanguageColor(language);
   const favoriteButtonCss = 'text-blue-primary border border-blue-primary hover:bg-blue-primary hover:text-white bg-white';
 
@@ -16,10 +18,12 @@ export async function RepositoryCard({ name, language, updated_at, owner, isFavo
       <div className="flex items-center gap-1 justify-between">
         <h2 className="text-lg font-semibold text-gray-neutral">{name}</h2>
         <ButtonRoundedHearth
+          id={id}
           owner={owner.login}
           repo={name}
-          isFavorite={isFavorite}
-          className={isFavorite ? favoriteButtonCss : ''}
+          isFavoritedByCookie={isFavoritedByCookie}
+          isFavorite={isFavorite || isFavoritedByCookie}
+          className={isFavorite || isFavoritedByCookie ? favoriteButtonCss : ''}
         />
       </div>
       <p className="font-normal text-sm text-gray-light">

@@ -5,6 +5,7 @@ import { RepositoryCard } from '@/components/repository-card';
 import { SearchUserForm } from '@/components/search-user';
 import { getUser } from '@/services/get-user';
 import { getUserRepos } from '@/services/get-user-repos';
+import NoRepoFound from '@/components/no-repo-found';
 
 interface ProfilePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -62,9 +63,7 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
         <div className="flex flex-col gap-4">
           <h2 className="text-[1.313rem] font-semibold text-blue-primary md:">Repositórios</h2>
           <div className="md:pb-6 flex flex-col gap-4 w-full" data-testid="profile-page-content-repositories">
-            {repos.map(repo => (
-              <RepositoryCard key={repo.id} {...repo} />
-            ))}
+            {repos.length === 0 ? <NoRepoFound /> : repos.map(repo => <RepositoryCard key={repo.id} {...repo} />)}
           </div>
         </div>
       </section>

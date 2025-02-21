@@ -44,7 +44,7 @@ export function BottomNavigation() {
                 }}
                 className={`w-full flex items-center justify-center gap-2 p-6 h-full disabled:pointer-events-none disabled:opacity-50 ${incrementCss}`}
               >
-                <FontAwesomeIcon icon={navItem.icon} />
+                <FontAwesomeIcon icon={navItem.icon} width={19} height={24} />
               </Button>
             </li>
           );
