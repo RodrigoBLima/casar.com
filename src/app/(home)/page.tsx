@@ -4,12 +4,11 @@ import NotFoundContent from './not-found';
 import SearchUserContent from './search-user';
 import { findUser } from '@/services/find-user';
 
-interface HomeProps {
-  searchParams: { [key: string]: string | undefined };
-}
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
-export default async function Home({ searchParams }: HomeProps) {
-  const { name } = await searchParams;
+export default async function Home(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const name = searchParams?.name;
   const githubUser = await findUser(name);
 
   return (

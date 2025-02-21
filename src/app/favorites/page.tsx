@@ -4,12 +4,11 @@ import NoRepoFound from '@/components/no-repo-found';
 import { RepositoryCard } from '@/components/repository-card';
 import { getStaredRepos } from '@/services/get-stared-repos';
 
-interface FavoritesProps {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
-export default async function Favorites({ searchParams }: FavoritesProps) {
-  const { name } = await searchParams;
+export default async function Favorites(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const name = searchParams?.name;
 
   const repos = await getStaredRepos(name as string, {
     next: {

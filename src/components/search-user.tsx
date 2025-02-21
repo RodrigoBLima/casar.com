@@ -17,7 +17,7 @@ type GithubUsernameSchema = z.infer<typeof githubUsernameSchema>;
 
 export function SearchUserForm() {
   const searchParams = useSearchParams();
-  const defaultName = searchParams.get('name') ?? '';
+  const defaultName = searchParams?.get('name') ?? '';
   const router = useRouter();
 
   const {
@@ -35,7 +35,7 @@ export function SearchUserForm() {
     if (result?.id) {
       router.push(`/profile?name=${result.login}`);
     } else {
-      router.push(`?name=${result.login}`);
+      router.push(`?name=${name}`);
     }
   }
 

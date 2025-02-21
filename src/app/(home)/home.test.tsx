@@ -29,7 +29,7 @@ describe('Home Page', () => {
   test('should render all components', async () => {
     (findUser as jest.Mock).mockResolvedValue(null);
 
-    const searchParams = {};
+    const searchParams = Promise.resolve({});
     const content = await Home({ searchParams });
     render(content);
 
@@ -42,8 +42,8 @@ describe('Home Page', () => {
 
   test('should render NotFoundContent ', async () => {
     (findUser as jest.Mock).mockResolvedValue(null);
-    const searchParams = { name: 'testuser' };
 
+    const searchParams = Promise.resolve({ name: 'testuser' });
     const content = await Home({ searchParams });
     render(content);
 

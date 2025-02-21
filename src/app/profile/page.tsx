@@ -1,3 +1,4 @@
+import { use } from 'react';
 import Image from 'next/image';
 import { BottomNavigation } from '@/components/bottom-navigation';
 import { Header } from '@/components/header';
@@ -7,12 +8,11 @@ import { getUser } from '@/services/get-user';
 import { getUserRepos } from '@/services/get-user-repos';
 import NoRepoFound from '@/components/no-repo-found';
 
-interface ProfilePageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
-export default async function ProfilePage({ searchParams }: ProfilePageProps) {
-  const { name } = await searchParams;
+export default async function ProfilePage(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const name = searchParams?.name;
 
   const user = await getUser(name as string);
   const repos = await getUserRepos(name as string, {
