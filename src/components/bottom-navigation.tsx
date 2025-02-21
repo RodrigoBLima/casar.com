@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Button } from './button';
 
-const getRouteName = (url: string) => url.replace(/^\//, '').split('?')[0];
+const getRouteName = (url: string) => url?.replace(/^\//, '').split('?')[0];
 
 export function BottomNavigation() {
   const router = useRouter();

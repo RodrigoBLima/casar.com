@@ -1,4 +1,4 @@
-import { Repository } from '@/app/interfaces/repository';
+import { Repository } from '@/interfaces/repository';
 import { GITHUB_API_BASE_URL } from '@/config/api';
 import { fetchHttpClient } from '@/infra/http/fetch';
 

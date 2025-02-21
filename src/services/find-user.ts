@@ -3,6 +3,7 @@ import { fetchHttpClient } from '@/infra/http/fetch';
 
 interface User {
   id: number;
+  login: string;
 }
 
 export async function findUser(query?: string | undefined): Promise<User> {

@@ -1,6 +1,6 @@
 import { getLanguageColor } from '@/services/get-language-color';
 import ButtonRoundedHearth from './button-rounded-hearth';
-import { Repository } from '@/app/interfaces/repository';
+import { Repository } from '@/interfaces/repository';
 import { formatUpdatedDate } from '@/utils/to-locale-date-string';
 import { checkRepoIsStarred } from '@/storage/cookie/check-repo-is-starred';
 
@@ -8,7 +8,15 @@ interface RepositoryCardProps extends Repository {
   isFavorite?: boolean;
 }
 
-export async function RepositoryCard({ id, name, language, updated_at, owner, isFavorite = false }: RepositoryCardProps) {
+export async function RepositoryCard({
+  id,
+  name,
+  language,
+  updated_at,
+  description,
+  owner,
+  isFavorite = false,
+}: RepositoryCardProps) {
   const isFavoritedByCookie = await checkRepoIsStarred(id);
   const color = await getLanguageColor(language);
   const favoriteButtonCss = 'text-blue-primary border border-blue-primary hover:bg-blue-primary hover:text-white bg-white';
@@ -26,9 +34,7 @@ export async function RepositoryCard({ id, name, language, updated_at, owner, is
           className={isFavorite || isFavoritedByCookie ? favoriteButtonCss : ''}
         />
       </div>
-      <p className="font-normal text-sm text-gray-light">
-        Essa é uma simples recriação da página inicial do instagram utilizando ReactJS com Styled Components.
-      </p>
+      <p className="font-normal text-sm text-gray-light">{description}</p>
       <div className="flex gap-1 flex-col md:flex-row md:gap-6">
         <div className="flex flex-row gap-2">
           <span className="w-4 h-4 rounded-full inline-block" style={{ backgroundColor: color }} />

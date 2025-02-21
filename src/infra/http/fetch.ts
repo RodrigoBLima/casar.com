@@ -9,9 +9,11 @@ export const fetchHttpClient: HttpClientConfig = {
     };
 
     const response = await fetch(url, { method: 'GET', headers, ...options });
+
     if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.statusText}`);
     }
+
     return response.json();
   },
 

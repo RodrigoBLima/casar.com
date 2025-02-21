@@ -33,9 +33,9 @@ export function SearchUserForm() {
     const result = await findUser(name);
 
     if (result?.id) {
-      router.push(`/profile?name=${name}`);
+      router.push(`/profile?name=${result.login}`);
     } else {
-      router.push(`?name=${name}`);
+      router.push(`?name=${result.login}`);
     }
   }
 
