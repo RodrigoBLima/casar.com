@@ -1,52 +1,38 @@
+"use client"
+
 import { twMerge } from 'tailwind-merge';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from './button';
-import { revalidateTag } from 'next/cache';
-import { deleteStaredRepo } from '@/services/delete-stared-repo';
-import { favorireGithubRepo } from '@/storage/cookie/favorite-github-repo';
-import { deleteRepoStaredFromCookie } from '@/storage/cookie/delete-repo-starred';
+import { favoriteGithubRepo } from '@/utils/localstorage/favorite-github-repo';
+import { deleteStarredRepo } from '@/utils/localstorage/delete-repo-starred';
+import { Repository } from '@/interfaces/repository';
+import { checkRepoIsStarred } from '@/utils/localstorage/check-repo-is-starred';
+import { useRouter } from 'next/navigation';
 
-interface ButtonRoundedHearthProps {
-  id: number;
-  owner: string;
-  repo: string;
-  className?: string;
-  isFavorite?: boolean;
-  isFavoritedByCookie?: boolean;
-}
+interface ButtonRoundedHearthProps extends Repository { }
 
-export default async function ButtonRoundedHearth({
-  id,
-  owner,
-  repo,
-  className,
-  isFavorite,
-  isFavoritedByCookie,
-}: ButtonRoundedHearthProps) {
-  async function handleClick() {
-    'use server';
+export default function ButtonRoundedHearth({ ...props }: ButtonRoundedHearthProps) {
+  const router = useRouter();
+  const isFavorite = checkRepoIsStarred(props.id);
+  const favoriteButtonCss = 'text-blue-primary border border-blue-primary hover:bg-blue-primary hover:text-white bg-white';
 
-    if (isFavoritedByCookie) {
-      await deleteRepoStaredFromCookie(id);
-      revalidateTag('get-user-repos');
-      return;
-    }
-
+  function handleClick() {
     if (isFavorite) {
-      await deleteStaredRepo(owner, repo);
-      revalidateTag('get-favorites');
+      deleteStarredRepo(props.id);
+      router.refresh()
       return;
     }
 
-    return await favorireGithubRepo(id);
+    router.refresh()
+    return favoriteGithubRepo(props);
   }
 
   return (
     <Button
       className={twMerge(
         'rounded-full w-8 h-8 flex items-center justify-center cursor-pointer transition duration-300 text-gray-light bg-white-matte hover:text-gray-dark',
-        className
+        isFavorite && favoriteButtonCss
       )}
       onClick={handleClick}
       data-testid="button-rounded-hearth"

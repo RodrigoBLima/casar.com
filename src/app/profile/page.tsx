@@ -1,4 +1,3 @@
-import { use } from 'react';
 import Image from 'next/image';
 import { BottomNavigation } from '@/components/bottom-navigation';
 import { Header } from '@/components/header';
@@ -13,13 +12,8 @@ type SearchParams = Promise<{ [key: string]: string | undefined }>;
 export default async function ProfilePage(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams;
   const name = searchParams?.name;
-
   const user = await getUser(name as string);
-  const repos = await getUserRepos(name as string, {
-    next: {
-      tags: ['get-user-repos'],
-    },
-  });
+  const repos = await getUserRepos(name as string);
 
   return (
     <main data-testid="profile-page">
