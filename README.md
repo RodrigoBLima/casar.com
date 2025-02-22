@@ -66,6 +66,18 @@ yarn test:watch
 pnpm test:watch
 ```
 
+## Rodando os Testes de Integração (Cypress)
+
+Para rodar os testes end-to-end com **Cypress**, utilize um dos seguintes comandos:
+
+```bash
+npm run cypress
+# ou
+yarn cypress
+# ou
+pnpm cypress
+```
+
 ## Tecnologias utilizadas
 
 - **Next.js**
@@ -73,6 +85,8 @@ pnpm test:watch
 - **Tailwind CSS**
 - **Zod**
 - **React Hook Form**
+- **Cypress**
+- **Jest**
 
 ## Demo
 
