@@ -42,7 +42,7 @@ export function SearchUserForm() {
   return (
     <form onSubmit={handleSubmit(handleSearchUser)} className="flex items-center md:pl-6 w-full" data-testid="header-search-user">
       <InputRoot error={!!errors?.name} className="w-full  max-w-[668px] flex-shrink">
-        <InputField {...register('name')} type="text" placeholder="Buscar usuário" />
+        <InputField {...register('name')} type="text" placeholder="Buscar usuário" id="header-search-user-input" />
         <InputIcon>
           <FontAwesomeIcon className="hidden md:block" icon={faMagnifyingGlass} />
         </InputIcon>

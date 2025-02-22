@@ -8,6 +8,6 @@ describe('Button component', () => {
     render(<Button data-testid="button-component">Test Button</Button>);
 
     const button = screen.getByTestId('button-component');
-    expect(button).toBeVisible();
+    expect(button).toBeVisible(); 
   });
 });
