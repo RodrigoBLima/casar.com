@@ -1,38 +1,25 @@
-import { getLanguageColor } from '@/services/get-language-color';
+import { getLanguageColor } from '@/utils/get-language-color';
 import ButtonRoundedHearth from './button-rounded-hearth';
 import { Repository } from '@/interfaces/repository';
 import { formatUpdatedDate } from '@/utils/to-locale-date-string';
-import { checkRepoIsStarred } from '@/storage/cookie/check-repo-is-starred';
 
-interface RepositoryCardProps extends Repository {
-  isFavorite?: boolean;
-}
+interface RepositoryCardProps extends Repository { }
 
-export async function RepositoryCard({
-  id,
-  name,
-  language,
-  updated_at,
-  description,
-  owner,
-  isFavorite = false,
-}: RepositoryCardProps) {
-  const isFavoritedByCookie = await checkRepoIsStarred(id);
-  const color = await getLanguageColor(language);
-  const favoriteButtonCss = 'text-blue-primary border border-blue-primary hover:bg-blue-primary hover:text-white bg-white';
+export function RepositoryCard(props: RepositoryCardProps) {
+  const {
+    name,
+    language,
+    updated_at,
+    description,
+  } = props
+
+  const color = getLanguageColor(language);
 
   return (
     <section className="flex flex-col gap-2 border-1 border-gray-soft rounded-sm p-4" data-testid="repository-card">
       <div className="flex items-center gap-1 justify-between">
         <h2 className="text-lg font-semibold text-gray-neutral">{name}</h2>
-        <ButtonRoundedHearth
-          id={id}
-          owner={owner.login}
-          repo={name}
-          isFavoritedByCookie={isFavoritedByCookie}
-          isFavorite={isFavorite || isFavoritedByCookie}
-          className={isFavorite || isFavoritedByCookie ? favoriteButtonCss : ''}
-        />
+        <ButtonRoundedHearth {...props} />
       </div>
       <p className="font-normal text-sm text-gray-light">{description}</p>
       <div className="flex gap-1 flex-col md:flex-row md:gap-6">

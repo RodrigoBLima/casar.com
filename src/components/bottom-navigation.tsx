@@ -18,7 +18,7 @@ export function BottomNavigation() {
     {
       name: 'Favorites',
       icon: faHeart,
-      href: `/favorites?name=${githubUserName}`,
+      href: `/favorites`,
       dataTestId: 'nav-item-favorites',
     },
   ];
