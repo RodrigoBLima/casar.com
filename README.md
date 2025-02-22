@@ -90,4 +90,4 @@ pnpm cypress
 
 ## Demo
 
-[Repo Radar](https://casar-biav1ibyf-rodrigo-barbosa-limas-projects.vercel.app/)
+[Repo Radar](https://repo-radar-fyy9c4y7z-rodrigo-barbosa-limas-projects.vercel.app/)
