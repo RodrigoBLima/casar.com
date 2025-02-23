@@ -1,7 +1,7 @@
 import { getLanguageColor } from '@/utils/get-language-color';
-import ButtonRoundedHearth from './button-rounded-hearth';
 import { Repository } from '@/interfaces/repository';
 import { formatUpdatedDate } from '@/utils/to-locale-date-string';
+import ButtonRoundedHearth from './button-rounded-hearth';
 
 interface RepositoryCardProps extends Repository { }
 

@@ -14,7 +14,7 @@ export function BottomNavigation() {
   const githubUserName = searchParams.get('name');
 
   const bottomNavItems = [
-    { name: 'Profile', icon: faUser, href: `/profile?name=${githubUserName}`, dataTestId: 'nav-item-profile' },
+    { name: 'Profile', icon: faUser, href: `/profile?name=${githubUserName || ""}`, dataTestId: 'nav-item-profile'  },
     {
       name: 'Favorites',
       icon: faHeart,
@@ -31,16 +31,12 @@ export function BottomNavigation() {
           const disabledClassName = 'bg-white text-gray-light hover:bg-white-matte';
           const activeClassName = 'text-white bg-blue-primary hover:bg-blue-light';
           const incrementCss = isCurrentRoute ? activeClassName : disabledClassName;
-          const isDisabled = !githubUserName;
 
           return (
             <li key={navItem.name} className="flex-1" aria-disabled={!githubUserName}>
               <Button
-                disabled={isDisabled}
                 onClick={() => {
-                  if (!isDisabled) {
                     router.push(navItem.href);
-                  }
                 }}
                 className={`w-full flex items-center justify-center gap-2 p-6 h-full disabled:pointer-events-none disabled:opacity-50 ${incrementCss}`}
               >
