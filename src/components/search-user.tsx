@@ -33,6 +33,7 @@ export function SearchUserForm() {
     const result = await findUser(name);
 
     if (result?.id) {
+      localStorage.setItem("githubUser", result.login)
       router.push(`/profile?name=${result.login}`);
     } else {
       router.push(`?name=${name}`);

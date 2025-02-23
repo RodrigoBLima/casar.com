@@ -26,7 +26,7 @@ export default function NotFound({ term }: NotFoundProps) {
         </div>
 
         <div className="md:block hidden justify-center">
-          <Image src={notFoundImage} alt="Imagem relacionada a pesquisa de algo" height={257} width={230} />
+          <Image src={notFoundImage} alt="Representando da ausência de resultados na pesquisa" height={257} width={230} />
         </div>
       </section>
     </main>

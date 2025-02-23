@@ -6,12 +6,16 @@ import { SearchUserForm } from '@/components/search-user';
 import { getUser } from '@/services/get-user';
 import { getUserRepos } from '@/services/get-user-repos';
 import NoRepoFound from '@/components/no-repo-found';
+import NotFoundProfile from './not-found-profile';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 export default async function ProfilePage(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams;
   const name = searchParams?.name;
+
+  if (!name) return <NotFoundProfile />;
+
   const user = await getUser(name as string);
   const repos = await getUserRepos(name as string);
 

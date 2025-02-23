@@ -11,7 +11,7 @@ export function BottomNavigation() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const githubUserName = searchParams.get('name');
+  const githubUserName = searchParams.get('name') || localStorage.getItem("githubUser");
 
   const bottomNavItems = [
     { name: 'Profile', icon: faUser, href: `/profile?name=${githubUserName || ""}`, dataTestId: 'nav-item-profile'  },

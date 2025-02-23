@@ -17,7 +17,7 @@ export default function SearchUserContent() {
         </div>
 
         <div className="md:block hidden justify-center">
-          <Image src={searchUserImage} alt="Imagem relacionada a pesquisa de algo" height={257} width={230} />
+          <Image src={searchUserImage} alt="Representando a pesquisa de usuário" height={257} width={230} />
         </div>
 
         <div className="w-full md:hidden block justify-center">
