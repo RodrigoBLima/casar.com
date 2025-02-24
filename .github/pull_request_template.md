@@ -4,7 +4,6 @@
 
 - Título da tarefa
 
-
 ## Descrição
 
 Descrição das alterações que estão sendo propostas.
