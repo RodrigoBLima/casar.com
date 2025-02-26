@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -11,10 +12,19 @@ export function BottomNavigation() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const githubUserName = searchParams.get('name') || localStorage.getItem("githubUser");
+  const [githubUserName, setGithubUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const nameFromStorage = localStorage?.getItem('githubUser');
+    setGithubUserName(nameFromStorage);
+  }, []);
+
+  const nameFromSearchParams = searchParams.get('name');
+  const isUserNotFound = searchParams.get('notExist') === 'true';
+  const finalUserName = nameFromSearchParams || githubUserName;
 
   const bottomNavItems = [
-    { name: 'Profile', icon: faUser, href: `/profile?name=${githubUserName || ""}`, dataTestId: 'nav-item-profile'  },
+    { name: 'Profile', icon: faUser, href: `/profile?name=${finalUserName || ""}`, disabled: !finalUserName || isUserNotFound, dataTestId: 'nav-item-profile' },
     {
       name: 'Favorites',
       icon: faHeart,
@@ -33,10 +43,12 @@ export function BottomNavigation() {
           const incrementCss = isCurrentRoute ? activeClassName : disabledClassName;
 
           return (
-            <li key={navItem.name} className="flex-1" aria-disabled={!githubUserName}>
+            <li key={navItem.name} className="flex-1" aria-disabled={!finalUserName}>
               <Button
+                aria-label={navItem.name}
+                disabled={navItem.disabled}
                 onClick={() => {
-                    router.push(navItem.href);
+                  router.push(navItem.href);
                 }}
                 className={`w-full flex items-center justify-center gap-2 p-6 h-full disabled:pointer-events-none disabled:opacity-50 ${incrementCss}`}
               >
