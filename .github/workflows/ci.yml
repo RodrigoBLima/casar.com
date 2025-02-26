@@ -26,6 +26,8 @@ jobs:
 
       - name: Rodar testes Cypress
         uses: cypress-io/github-action@v3
+        env:
+          NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_TOKEN }}
         with:
           start: npm run start
           wait-on: "http://localhost:3000"
