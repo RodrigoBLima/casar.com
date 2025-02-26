@@ -36,7 +36,8 @@ export function SearchUserForm() {
       localStorage.setItem("githubUser", result.login)
       router.push(`/profile?name=${result.login}`);
     } else {
-      router.push(`?name=${name}`);
+      localStorage.removeItem('githubUser');
+      router.push(`?name=${name}&notExist=true`);
     }
   }
 
