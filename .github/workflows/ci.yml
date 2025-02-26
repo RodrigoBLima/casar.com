@@ -29,7 +29,4 @@ jobs:
         with:
           start: npm run start
           wait-on: "http://localhost:3000"
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_TOKEN }}
 
