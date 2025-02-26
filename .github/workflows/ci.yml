@@ -1,0 +1,35 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Build da aplicação Next
+        run: npm run build
+
+      - name: Rodar testes Cypress
+        uses: cypress-io/github-action@v3
+        with:
+          start: npm run start
+          wait-on: "http://localhost:3000"
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_TOKEN }}
+

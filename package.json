@@ -12,6 +12,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "cypress": "cypress open",
+    "cypress:ci": "cypress run",
     "pre-commit": "npm run ts-check && lint-staged",
     "prepare": "husky",
     "format": "prettier --check .",
