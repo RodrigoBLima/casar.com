@@ -1,0 +1,27 @@
+name: Testes unitários
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Jest:
+    name: Testes unitátios do app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Instalando dependências
+        run: |
+          npm install
+
+      - name: Run Jest testes
+        run: npm run test
