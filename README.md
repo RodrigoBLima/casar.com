@@ -4,7 +4,7 @@ Repo Radar é uma aplicação frontend responsiva que permite buscar usuários d
 
 ## Propósito da aplicação
 
-Este projeto foi desenvolvido como parte do processo seletivo da empresa Casar.com para vagas de desenvolvedor sênior/pleno na área de frontend.
+O propósito do Repo Radar é simplificar a busca e organização de repositórios do GitHub, permitindo que os usuários encontrem perfis, favoritem projetos de interesse e gerenciem facilmente sua lista de favoritos para acesso rápido e eficiente.
 
 # Guia de Início
 
