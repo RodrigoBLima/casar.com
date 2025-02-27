@@ -29,8 +29,14 @@ jobs:
           NEXT_PUBLIC_GITHUB_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_TOKEN }}
         run: npm run build
 
-    outputs:
-      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+      - name: Salvar artefatos
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: |
+            node_modules
+            .next
+            package.json
 
   jest:
     name: Testes Unitários (Jest)
@@ -40,14 +46,13 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v2
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v3
+      - name: Baixar artefatos do build
+        uses: actions/download-artifact@v3
         with:
-          node-version: 20
-          cache: "npm"
+          name: app-build
 
       - name: Rodar testes Jest
-        run: npm test
+        run: npm run test
 
   cypress:
     name: Testes de Integração (Cypress)
@@ -57,11 +62,10 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v2
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v3
+      - name: Baixar artefatos do build
+        uses: actions/download-artifact@v3
         with:
-          node-version: 20
-          cache: "npm"
+          name: app-build
 
       - name: Rodar testes Cypress
         uses: cypress-io/github-action@v3
